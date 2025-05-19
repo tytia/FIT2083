@@ -2,10 +2,10 @@ from typing import List, Tuple
 
 # horizontal ─
 # vertial │
-# tl corner ┌
-# tr corner ┐
-# bl corner └
-# br corner ┘
+# top-left corner ┌
+# top-right corner ┐
+# bottom-left corner └
+# bottom-right corner ┘
 # path #
 # road ◇
 # car ◈
