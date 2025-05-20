@@ -4,18 +4,18 @@ from typing import List
 
 class CellType(Enum):
     ROAD = 0
-    PATH = 1
+    RAMP = 1
     UNOCCUPIED = 2
     OCCUPIED = 3
-
+    VOID = 4
 
 class MultiLevelCarPark:
     def __init__(self, levels: int, rows: int, cols: int) -> None:
         self.levels = self._construct_carpark(levels, rows, cols)
         self.length = len(self.levels[0])
         self.width = len(self.levels[0][0])
-        self.south_entrance = (self.length - 1, 1)
-        self.north_entrance = (0, self.width-2)
+        self.south_entrance = (self.length - 2, 1)
+        self.north_entrance = (1, self.width-2)
 
         self.parking_cells = []
         for i, row in enumerate(self.levels[-1]):
@@ -26,7 +26,10 @@ class MultiLevelCarPark:
     def _construct_carpark(self, levels: int, rows: int, cols: int) -> List[List[List[CellType]]]:
         carpark = []
         for _ in range(levels):
-            level = [[CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED]]
+            level = [
+                [CellType.VOID] + [CellType.RAMP] * cols + [CellType.VOID],
+                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED]
+            ]
             for _ in range(rows // 2 - 1):
                 level += [
                     [CellType.OCCUPIED] + [CellType.ROAD] * cols + [CellType.OCCUPIED],
@@ -35,12 +38,13 @@ class MultiLevelCarPark:
                 ]
             level += [
                 [CellType.OCCUPIED] + [CellType.ROAD] * cols + [CellType.OCCUPIED],
-                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED]
+                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED],
+                [CellType.VOID] + [CellType.RAMP] * cols + [CellType.VOID]
             ]
             carpark.append(level)
 
-        carpark[-1][0][1] = CellType.OCCUPIED
-        carpark[-1][-1][-2] = CellType.OCCUPIED
+        carpark[-1][1][1] = CellType.OCCUPIED
+        carpark[-1][-2][-2] = CellType.OCCUPIED
         
         return carpark
     
@@ -85,9 +89,9 @@ if __name__ == "__main__":
             print(" ".join([cell.name[0] for cell in row]))
         print()
 
-    carpark.set_capacity(0.8)
+    # carpark.set_capacity(0.8)
 
-    for level in carpark.levels:
-        for row in level:
-            print(" ".join([cell.name[0] for cell in row]))
-        print()
+    # for level in carpark.levels:
+    #     for row in level:
+    #         print(" ".join([cell.name[0] for cell in row]))
+    #     print()
