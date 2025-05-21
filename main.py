@@ -42,10 +42,10 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    # visualization, comment out main()
+    # visualization
     # carpark = MultiLevelCarPark(levels=6, rows=10, cols=20)
     # carpark.set_capacity(0.95, seed=3)
     # bottom_up_driver = BottomUpDriver(carpark)
-    # bottom_up_driver.search_for_parking(visualize=True, delay=0.3)
+    # bottom_up_driver.search_for_parking(visualize=True, delay=0.1)
     # # top_down_driver = TopDownDriver(carpark)
     # # top_down_driver.search_for_parking(visualize=True, delay=0.3)
