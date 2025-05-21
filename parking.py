@@ -31,7 +31,7 @@ class MultiLevelCarPark:
         for _ in range(levels):
             level = [
                 [CellType.VOID] + [CellType.RAMP] * cols + [CellType.VOID],
-                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED]
+                [CellType.OCCUPIED, CellType.RAMP] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED]
             ]
             for _ in range(rows // 2 - 1):
                 level += [
@@ -41,7 +41,7 @@ class MultiLevelCarPark:
                 ]
             level += [
                 [CellType.OCCUPIED] + [CellType.ROAD] * cols + [CellType.OCCUPIED],
-                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.ROAD, CellType.OCCUPIED],
+                [CellType.OCCUPIED, CellType.ROAD] + [CellType.OCCUPIED] * (cols - 2) + [CellType.RAMP, CellType.OCCUPIED],
                 [CellType.VOID] + [CellType.RAMP] * cols + [CellType.VOID]
             ]
             carpark.append(level)
