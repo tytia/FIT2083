@@ -8,6 +8,7 @@ def main() -> None:
     carpark = MultiLevelCarPark(levels=6, rows=10, cols=20)
     bottom_up_driver = BottomUpDriver(carpark)
     top_down_driver = TopDownDriver(carpark)
+    sample_size = 1001
 
     try:
         capacities = list(map(float, sys.argv[1:]))
@@ -18,10 +19,9 @@ def main() -> None:
     for i, capacity in enumerate(capacities):
         print(f"\nCapacity: {int(capacity * 100)}%")
         bottom_up_times, top_down_times = [], []
-        # sample size = 1001
-        for k in range(1001):
+        for k in range(sample_size):
             # Set the capacity of the carpark
-            carpark.set_capacity(capacity, seed=k * (i + 1))
+            carpark.set_capacity(capacity, seed=k + (i * sample_size))
             # Simulate the drivers moving through the carpark
             bottom_up_times.append(bottom_up_driver.search_for_parking())
             top_down_times.append(top_down_driver.search_for_parking())
