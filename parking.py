@@ -12,10 +12,13 @@ class CellType(Enum):
 class MultiLevelCarPark:
     def __init__(self, levels: int, rows: int, cols: int) -> None:
         self.levels = self._construct_carpark(levels, rows, cols)
+        self.rows = rows
         self.length = len(self.levels[0])
         self.width = len(self.levels[0][0])
         self.south_entrance = (self.length - 2, 1)
-        self.north_entrance = (1, self.width-2)
+        self.north_entrance = (1, self.width - 2)
+        self.south_ramp = (self.length - 2, self.width - 2)
+        self.north_ramp = (1, 1)
 
         self.parking_cells = []
         for i, row in enumerate(self.levels[-1]):
@@ -55,9 +58,9 @@ class MultiLevelCarPark:
         unnoccupied_count = round((1.0 - capacity) * len(self.parking_cells))
         for _ in range(unnoccupied_count):
             # randomly select a level, favoring the top levels
-            k = max(0, len(self.levels) - 1 - round(abs(random.normal(0, len(self.levels) / 3))))
+            k = max(0, len(self.levels) - 1 - round(abs(random.normal(0, (len(self.levels) - 1) / 3))))
             # randomly select a cell in the level, favoring the middle rows
-            c = max(0, min(round(random.normal(len(self.parking_cells) / 2, len(self.parking_cells) / 4)), len(self.parking_cells) - 1))
+            c = max(0, min(round(random.normal(len(self.parking_cells) / 2, len(self.parking_cells) / 8)), len(self.parking_cells) - 1))
             # check if the cell is already unoccupied - if it is, linearly search for the next unoccupied cell
             l, r = c - 1, c + 1
             while c in visited[k]:
