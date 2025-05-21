@@ -5,7 +5,7 @@ import sys
 
 def main() -> None:
     # Initialize the carpark and drivers
-    carpark = MultiLevelCarPark(levels=3, rows=10, cols=20)
+    carpark = MultiLevelCarPark(levels=6, rows=10, cols=20)
     bottom_up_driver = BottomUpDriver(carpark)
     top_down_driver = TopDownDriver(carpark)
 
@@ -42,3 +42,10 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    # visualization, comment out main()
+    # carpark = MultiLevelCarPark(levels=6, rows=10, cols=20)
+    # carpark.set_capacity(0.95, seed=3)
+    # bottom_up_driver = BottomUpDriver(carpark)
+    # bottom_up_driver.search_for_parking(visualize=True, delay=0.3)
+    # # top_down_driver = TopDownDriver(carpark)
+    # # top_down_driver.search_for_parking(visualize=True, delay=0.3)

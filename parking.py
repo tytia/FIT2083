@@ -58,7 +58,7 @@ class MultiLevelCarPark:
         unnoccupied_count = round((1.0 - capacity) * len(self.parking_cells))
         for _ in range(unnoccupied_count):
             # randomly select a level, favoring the top levels
-            k = max(0, len(self.levels) - 1 - round(abs(random.normal(0, (len(self.levels) - 1) / 3))))
+            k = max(0, len(self.levels) - 1 - round(abs(random.normal(0, (len(self.levels) - 1) / 2.6))))
             # randomly select a cell in the level, favoring the middle rows
             c = max(0, min(round(random.normal(len(self.parking_cells) / 2, len(self.parking_cells) / 8)), len(self.parking_cells) - 1))
             # check if the cell is already unoccupied - if it is, linearly search for the next unoccupied cell
