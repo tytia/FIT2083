@@ -153,13 +153,14 @@ class DriverBase(ABC):
             The time taken to find a parking space.
         """
         if visualize:
+            self.display()
             while not self.completed:
-                self.display()
-                self._tick()
-                sleep(delay)
                 # clear display
                 for _ in range(self.carpark.length + 3):
                     sys.stdout.write("\x1b[1A\x1b[2K")
+                self.display()
+                self._tick()
+                sleep(delay)
         else:
             while not self.completed:
                 self._tick()
